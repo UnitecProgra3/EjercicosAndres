@@ -1,48 +1,39 @@
 #include <iostream>
+#include <vector>
+#include "Personaje.h"
+#include "Guerrero.h"
+#include "Tanque.h"
+#include "Mago.h"
+#include "Arquero.h"
 using namespace std;
-
-int getMenor(int a, int b, int c)
-{
-    if(a < b && a <c)
-        return a;
-    if(b < a && b < c)
-        return b;
-    return c;
-}
-
-bool esMultiploDe2(int num)
-{
-    return num%2==0;
-}
-
-int fibonacci(int num)
-{
-    int numeros[10];
-    numeros[0]=0;
-    numeros[1]=1;
-    for(int i=2;i<10;i++)
-        numeros[i]=numeros[i-1]+numeros[i-2];
-
-    return numeros[num];
-}
-
-double getPromedio(double a, double b, double c)
-{
-    return (a+b+c)/3;
-}
-
-int func1()
-{
-    int x=1;
-    int *y = new int(2);
-
-    cout<<x<<endl;
-    cout<<y<<endl;
-    cout<<*y<<endl;
-}
 
 int main()
 {
-    func1();
+    vector<Personaje*>personajes;
+
+    personajes.push_back(new Arquero(10,60));
+
+    while(true)
+    {
+        cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"<<endl;
+        for(int i=0; i<personajes.size();i++)
+        {
+            cout<<personajes[i]->tipo<<endl;
+            cout<<"atk: "<<personajes[i]->ataque<<endl;
+            cout<<"hp: "<<personajes[i]->vida<<endl;
+            personajes[i]->especial();
+        }
+
+        cout<<"Agregar: "<<endl;
+        int opcion;
+        cin>>opcion;
+        if(opcion==1)
+            personajes.push_back(new Mago(10,40));
+        if(opcion==2)
+            personajes.push_back(new Guerrero(10,40));
+        if(opcion==3)
+            personajes.push_back(new Tanque(10,40));
+    }
+
     return 0;
 }
